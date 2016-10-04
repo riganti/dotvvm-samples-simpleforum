@@ -1,0 +1,56 @@
+﻿@viewModel SimpleForum.ViewModels.DefaultViewModel, SimpleForum
+@masterPage Views/site.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+
+    <dot:Repeater DataSource="{value: ForumThreads}">
+        <div class="row box">
+            <div class="col-lg-2 small">
+                <img src="{value: '/userImages/' + LastPostUserName + '.gif'}" alt="{value: LastPostUserName}" class="img-responsive" />                
+            </div>
+            <div class="col-lg-10 well">
+                <h2>
+                    <dot:RouteLink RouteName="Thread" Param-Id="{value: Id}">
+                        <span class="glyphicon glyphicon-comment"></span>
+                        {{value: Title}}
+                    </dot:RouteLink>
+                </h2>
+                <p>
+                    <dot:RouteLink RouteName="Thread" Param-Id="{value: Id}" Text="{value: FirstPostMessage}" />
+                </p>
+                <p class="small">
+                    <dot:Literal Text="{value: CreatedDate}" FormatString="G" /> by
+                    {{value: LastPostUserName}},
+                    {{value: PostsCount - 1}} replies,
+                    last reply on <dot:Literal Text="{value: LastPostDate}" FormatString="g" />
+                </p>
+            </div>
+        </div>
+    </dot:Repeater>
+
+    <dot:DataPager DataSet="{value: ForumThreads}" class="pagination" />
+
+    <dot:AuthenticatedView>
+        <hr />
+        <h2>Create Thread</h2>
+
+        <div class="form" DataContext="{value: NewThread}">
+            <div class="form-group">
+                <label class="control-label">Title</label>
+                <div Validator.Value="{value: Title}">
+                    <dot:TextBox Text="{value: Title}" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Message</label>
+                <div Validator.Value="{value: Message}">
+                    <dot:TextBox Text="{value: Message}" class="form-control" Type="MultiLine" style="height: 100px" />
+                </div>
+            </div>
+            <div class="text-right">
+                <dot:Button Text="Create Thread" Click="{command: _parent.CreateThread()}" class="btn btn-primary" />
+            </div>
+        </div>
+    </dot:AuthenticatedView>
+
+</dot:Content>

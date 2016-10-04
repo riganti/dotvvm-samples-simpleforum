@@ -1,0 +1,40 @@
+﻿@viewModel SimpleForum.ViewModels.SiteViewModel, SimpleForum
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/site.css" rel="stylesheet" />
+</head>
+<body Validator.InvalidCssClass="has-error" Validator.SetToolTipText="true">
+
+    <div class="container">
+
+        <header>
+            <div class="pull-right">
+                <dot:AuthenticatedView>
+                    <NotAuthenticatedTemplate>
+                        <dot:RouteLink RouteName="Login" Text="Sign In" />
+                    </NotAuthenticatedTemplate>
+                    <AuthenticatedTemplate>
+                        <dot:LinkButton Click="{command: Logout()}" Text="Sign Out" Validation.Enabled="false" />
+                    </AuthenticatedTemplate>
+                </dot:AuthenticatedView>
+            </div>
+
+            <h1>Simple Forum</h1>
+        </header>
+
+        <dot:ContentPlaceHolder ID="MainContent" />
+
+    </div>
+
+</body>
+</html>
+
+

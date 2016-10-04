@@ -1,0 +1,45 @@
+﻿@viewModel SimpleForum.ViewModels.ThreadViewModel, SimpleForum
+@masterPage Views/site.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+
+    <p>
+        <dot:RouteLink RouteName="Default">
+            <span class="glyphicon glyphicon-arrow-left"></span> Home
+        </dot:RouteLink>
+    </p>
+
+    <dot:Repeater DataSource="{value: ForumPosts}">
+        <div class="row box">
+            <div class="col-lg-2 small">
+                <img src="{value: '/userImages/' + AppUserName + '.gif'}" alt="{value: AppUserName}" class="img-responsive" />
+            </div>
+            <div class="col-lg-10 well">
+                <p>{{value: Message}}</p>
+                <p class="small"><dot:Literal Text="{value: CreatedDate}" FormatString="G" />, {{value: AppUserName}} ({{value: AppUserNumberOfPosts - 1}} posts)</p>
+            </div>
+        </div>
+    </dot:Repeater>
+
+    <dot:DataPager DataSet="{value: ForumPosts}" class="pagination" />
+
+
+    <dot:AuthenticatedView>
+        <hr />
+        <h2>Reply To This Thread</h2>
+
+        <div class="form" DataContext="{value: NewPost}">
+            <div class="form-group">
+                <label class="control-label">Message</label>
+                <div Validator.Value="{value: Message}">
+                    <dot:TextBox Text="{value: Message}" class="form-control" Type="MultiLine" style="height: 100px" />
+                </div>
+            </div>
+            <div class="text-right">
+                <dot:Button Text="Send Reply" Click="{command: _parent.AddPost()}" class="btn btn-primary" />
+            </div>
+        </div>
+    </dot:AuthenticatedView>
+
+</dot:Content>
+
