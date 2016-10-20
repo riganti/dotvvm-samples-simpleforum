@@ -26,11 +26,23 @@ namespace SimpleForum.Services
                 {
                     Id = t.Id,
                     Title = t.Title,
-                    FirstPostMessage = t.ForumPosts.OrderBy(p => p.Id).FirstOrDefault().Message,
+
+                    FirstPostMessage = t.ForumPosts
+                        .OrderBy(p => p.Id)
+                        .FirstOrDefault().Message,
+
                     CreatedDate = t.CreatedDate,
                     PostsCount = t.ForumPosts.Count,
-                    LastPostUserName = t.ForumPosts.OrderByDescending(p => p.Id).Select(p => p.AppUser.UserName).FirstOrDefault(),
-                    LastPostDate = t.ForumPosts.OrderByDescending(p => p.Id).FirstOrDefault().CreatedDate,
+
+                    LastPostUserName = t.ForumPosts
+                        .OrderByDescending(p => p.Id)
+                        .Select(p => p.AppUser.UserName)
+                        .FirstOrDefault(),
+
+                    LastPostDate = t.ForumPosts
+                        .OrderByDescending(p => p.Id)
+                        .FirstOrDefault()
+                        .CreatedDate,
                 });
 
             dataSet.LoadFromQueryable(query);

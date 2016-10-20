@@ -10,8 +10,8 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.AspNetCore.StaticFiles": "1.0.0",
 
-    "DotVVM": "1.0.8-pre",
-    "DotVVM.AspNetCore": "1.0.8-pre",
+    "DotVVM": "1.1.0-alpha",
+    "DotVVM.AspNetCore": "1.1.0-alpha",
 
     "Microsoft.EntityFrameworkCore": "1.0.1",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
